@@ -8,7 +8,6 @@ class Subject(TimeStampedModel):
         (1, 'man'),
         (2, 'woman'),
     )
-
     name = models.CharField(
         max_length=25,
         null=False, blank=False,
@@ -18,6 +17,10 @@ class Subject(TimeStampedModel):
         null=False, blank=False,
         db_column='SUBJECT_AGE'
     )
+    birth = models.DateField(
+        null=False, blank=False,
+        db_column='SUBJECT_BIRTH'
+    )
     sex = models.CharField(
         max_length=10,
         null=False, blank=False,
@@ -25,10 +28,11 @@ class Subject(TimeStampedModel):
         db_column='SUBJECT_SEX'
     )
     measurement_date = models.DateTimeField(
-        null=False, blank=False,
+        null=True, blank=True,
         db_column='SUBJECT_MEASUREMENT_DATE'
     )
 
     class Meta:
         db_table = 'OC_USER'
-        ordering = ['pk']
+        ordering = ['id']
+        unique_together = ['name', 'age', 'birth']

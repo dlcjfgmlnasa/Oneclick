@@ -1,7 +1,9 @@
 # -*- coding:utf-8 -*-
+from rest_framework.views import APIView
 from rest_framework import status
 from .models import Subject
 from .serializer import SubjectSerializer
+from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Q
@@ -13,7 +15,23 @@ class SubjectSetPagination(PageNumberPagination):
     max_page_size = 1000
 
 
-class AccountListView(ListAPIView):
+class SubjectView(APIView):
+    def post(self, request):
+        serializer_cls = SubjectSerializer(data=request.data)
+        if serializer_cls.is_valid():
+            serializer_cls.save()
+
+            return Response(
+                serializer_cls.data,
+                status=status.HTTP_200_OK
+            )
+        return Response(
+            serializer_cls.errors,
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+
+class SubjectListView(ListAPIView):
     pagination_class = SubjectSetPagination
     serializer_class = SubjectSerializer
 

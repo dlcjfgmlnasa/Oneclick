@@ -3,6 +3,19 @@ from subjects.models import Subject
 from rest_framework import serializers
 
 
+class SubjectCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = (
+            'pk',
+            'name',
+            'age',
+            'birth',
+            'sex',
+            'measurement_date',
+        )
+
+
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
@@ -10,6 +23,7 @@ class SubjectSerializer(serializers.ModelSerializer):
             'pk',
             'name',
             'age',
+            'birth',
             'sex',
             'measurement_date',
             'int_dt',
