@@ -146,7 +146,8 @@ SIMPLE_JWT = {
 CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000',
                          'http://localhost:3000',
                          'http://localhost:5000',
-                         'http://127.0.0.1:5000']
+                         'http://127.0.0.1:5000',
+                         'http://34.64.120.63']
 
 
 CORS_ALLOW_CREDENTIALS = True
