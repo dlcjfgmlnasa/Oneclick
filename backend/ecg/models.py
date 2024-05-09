@@ -7,11 +7,11 @@ class HRV(TimeStampedModel):
     subject = models.ForeignKey(
         'subjects.Subject',
         null=True, on_delete=models.CASCADE,
-        related_name='hrv', db_column='HRV_SUBJECT_ID'
+        related_name='hrv', db_column='SUBJECT_ID'
     )
-    date = models.DateTimeField(
-        null=False, blank=False,
-        db_column='HRV_DATE'
+    measurement_date = models.DateTimeField(
+        null=True, blank=True,
+        db_column='MEASUREMENT_DATE'
     )
     baseline = models.ForeignKey(
         'ecg.Baseline',
@@ -38,6 +38,9 @@ class HRV(TimeStampedModel):
         null=True, on_delete=models.CASCADE,
         related_name='hrv', db_column='HRV_RECOVERY_2_ID'
     )
+
+    class Meta:
+        db_table = 'OC_HRV'
 
 
 class HRVParameter(TimeStampedModel):
@@ -104,6 +107,9 @@ class HRVParameter(TimeStampedModel):
         null=True, blank=True,
         db_column='HRV_SD1_SD2_RATIO'
     )
+
+    class Meta:
+        abstract = True
 
 
 class Baseline(HRVParameter):

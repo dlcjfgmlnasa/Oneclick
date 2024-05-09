@@ -12,7 +12,6 @@ class SubjectCreateSerializer(serializers.ModelSerializer):
             'age',
             'birth',
             'sex',
-            'measurement_date',
         )
 
 
@@ -25,7 +24,6 @@ class SubjectSerializer(serializers.ModelSerializer):
             'age',
             'birth',
             'sex',
-            'measurement_date',
             'int_dt',
             'upt_dt'
         )

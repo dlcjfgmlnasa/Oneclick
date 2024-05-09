@@ -27,10 +27,6 @@ class Subject(TimeStampedModel):
         choices=SEX_STATE_CHOICE,
         db_column='SUBJECT_SEX'
     )
-    measurement_date = models.DateTimeField(
-        null=True, blank=True,
-        db_column='SUBJECT_MEASUREMENT_DATE'
-    )
 
     class Meta:
         db_table = 'OC_USER'
