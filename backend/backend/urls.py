@@ -27,7 +27,7 @@ urlpatterns = [
     path('api/v1/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
     # REST API
-    path('api/v1/subject/', include('subjects.urls')),
+    path('api/v1/exp/', include('experiments.urls')),
     path('api/v1/ecg/', include('ecg.urls')),
     path('api/v1/eeg/', include('eeg.urls')),
 ]

@@ -47,7 +47,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'subjects',
+    'experiments',
     'ecg',
     'eeg',
 ]

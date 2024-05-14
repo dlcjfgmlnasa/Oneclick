@@ -4,14 +4,13 @@ from backend.model import TimeStampedModel
 
 
 class HRV(TimeStampedModel):
-    subject = models.ForeignKey(
-        'subjects.Subject',
-        null=True, on_delete=models.CASCADE,
-        related_name='hrv', db_column='SUBJECT_ID'
+    nni = models.JSONField(
+        null=True,
+        db_column='HRV_NNI'
     )
-    measurement_date = models.DateTimeField(
-        null=True, blank=True,
-        db_column='MEASUREMENT_DATE'
+    rmssd = models.JSONField(
+        null=True,
+        db_column='HRV_RMSSD'
     )
     baseline = models.ForeignKey(
         'ecg.Baseline',
@@ -44,7 +43,7 @@ class HRV(TimeStampedModel):
 
 
 class HRVParameter(TimeStampedModel):
-    # 1. [Time-Domain Parameter]
+    # >> 1. Time-Domain
     mean_hr = models.FloatField(
         null=True, blank=True,
         db_column='HRV_MEAN_HR'
@@ -77,7 +76,7 @@ class HRVParameter(TimeStampedModel):
         null=True, blank=True,
         db_column='HRV_pNN05'
     )
-    # 2. [Frequency-Domain Parameter]
+    # >> 2. Frequency-Domain
     vlf = models.FloatField(
         null=True, blank=True,
         db_column='HRV_VLF'
@@ -94,7 +93,7 @@ class HRVParameter(TimeStampedModel):
         null=True, blank=True,
         db_column='HRV_LF_HF_RATIO'
     )
-    # 3. [Non-Linear Parameter]
+    # >> 3. Non-Linear
     sd1 = models.FloatField(
         null=True, blank=True,
         db_column='HRV_SD1'

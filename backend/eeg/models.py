@@ -1,3 +1,8 @@
+# -*- coding:utf-8 -*-
 from django.db import models
+from backend.model import TimeStampedModel
 
-# Create your models here.
+
+class EEG(TimeStampedModel):
+    class Meta:
+        db_table = 'OC_EEG'

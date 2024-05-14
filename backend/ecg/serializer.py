@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 from ecg.models import *
-from subjects.serializer import SubjectSerializer
 from rest_framework import serializers
 
 
@@ -61,7 +60,6 @@ class Recovery2Serializer(serializers.ModelSerializer):
 
 class HRVSerializer(serializers.ModelSerializer):
     pk = serializers.IntegerField(read_only=True)
-    subject = SubjectSerializer(read_only=True)
     baseline = BaseLineSerializer(read_only=True)
     stimulation1 = Stimulation1Serializer(read_only=True)
     recovery1 = Recovery1Serializer(read_only=True)
@@ -72,8 +70,8 @@ class HRVSerializer(serializers.ModelSerializer):
         model = HRV
         fields = (
             'pk',
-            'subject',
-            'measurement_date',
+            'nni',
+            'rmssd',
             'baseline',
             'stimulation1',
             'recovery1',
