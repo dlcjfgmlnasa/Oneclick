@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import AllowAny
 from .serializer import ExperimentsViewSerializer
 from .models import Experiments
 from ecg.models import *
@@ -18,6 +19,8 @@ class ExperimentsPagination(PageNumberPagination):
 
 
 class ExperimentView(APIView):
+    permission_classes = [AllowAny]
+
     @staticmethod
     def get_value(data, param_name):
         try:
@@ -55,10 +58,12 @@ class ExperimentView(APIView):
             )
             exp.save()
             return Response(
+                {'result': 'Success!!'},
                 status=status.HTTP_200_OK
             )
         except Exception as e:
             return Response(
+                {'result': 'Failed!! Contact Your Administrator!!'},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
