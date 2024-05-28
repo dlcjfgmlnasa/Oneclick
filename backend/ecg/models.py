@@ -44,14 +44,6 @@ class HRV(TimeStampedModel):
 
 class HRVParameter(TimeStampedModel):
     # >> 1. Time-Domain
-    mean_hr = models.FloatField(
-        null=True, blank=True,
-        db_column='HRV_MEAN_HR'
-    )
-    mean_rr = models.FloatField(
-        null=True, blank=True,
-        db_column='HRV_MEAN_RR'
-    )
     sdnn = models.FloatField(
         null=True, blank=True,
         db_column='HRV_SDNN'
@@ -60,51 +52,47 @@ class HRVParameter(TimeStampedModel):
         null=True, blank=True,
         db_column='HRV_RMSSD'
     )
+    sdsd = models.FloatField(
+        null=True, blank=True,
+        db_column='HRV_SDSD'
+    )
+    nn50 = models.FloatField(
+        null=True, blank=True,
+        db_column='HRV_NN50'
+    )
     pnn50 = models.FloatField(
         null=True, blank=True,
         db_column='HRV_pNN50'
     )
-    pnn20 = models.FloatField(
+    tri_index = models.FloatField(
         null=True, blank=True,
-        db_column='HRV_pNN20'
+        db_column='HRV_TRI_Index'
     )
-    pnn10 = models.FloatField(
-        null=True, blank=True,
-        db_column='HRV_pNN10'
-    )
-    pnn05 = models.FloatField(
-        null=True, blank=True,
-        db_column='HRV_pNN05'
-    )
+
     # >> 2. Frequency-Domain
-    vlf = models.FloatField(
+    vlf_rel_power = models.FloatField(
         null=True, blank=True,
-        db_column='HRV_VLF'
+        db_column='HRV_REL_VLF'
     )
-    lf = models.FloatField(
+    lf_rel_power = models.FloatField(
         null=True, blank=True,
-        db_column='HRV_LF'
+        db_column='HRV_REL_LF'
     )
-    hf = models.FloatField(
+    hf_rel_power = models.FloatField(
         null=True, blank=True,
-        db_column='HRV_HF'
+        db_column='HRV_REF_HF'
     )
-    lf_hf_ratio = models.FloatField(
+    lh_ratio = models.FloatField(
         null=True, blank=True,
-        db_column='HRV_LF_HF_RATIO'
+        db_column='HRV_LH_RATIO'
     )
-    # >> 3. Non-Linear
-    sd1 = models.FloatField(
+    norm_lf = models.FloatField(
         null=True, blank=True,
-        db_column='HRV_SD1'
+        db_column='HRV_NORM_LF'
     )
-    sd2 = models.FloatField(
+    norm_hf = models.FloatField(
         null=True, blank=True,
-        db_column='HRV_SD2'
-    )
-    sd1_sd2_ratio = models.FloatField(
-        null=True, blank=True,
-        db_column='HRV_SD1_SD2_RATIO'
+        db_column='HRV_NORM_HF'
     )
 
     class Meta:
