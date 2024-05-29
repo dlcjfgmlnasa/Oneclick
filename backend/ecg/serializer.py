@@ -6,56 +6,31 @@ from rest_framework import serializers
 class BaseLineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Baseline
-        fields = (
-            'pk',
-            'mean_hr', 'mean_rr', 'sdnn', 'rmssd', 'pnn50', 'pnn20', 'pnn10', 'pnn05',
-            'vlf', 'lf', 'hf', 'lf_hf_ratio',
-            'sd1', 'sd2', 'sd1_sd2_ratio'
-        )
+        fields = '__all__'
 
 
 class Stimulation1Serializer(serializers.ModelSerializer):
     class Meta:
         model = Stimulation1
-        fields = (
-            'pk',
-            'mean_hr', 'mean_rr', 'sdnn', 'rmssd', 'pnn50', 'pnn20', 'pnn10', 'pnn05',
-            'vlf', 'lf', 'hf', 'lf_hf_ratio',
-            'sd1', 'sd2', 'sd1_sd2_ratio'
-        )
+        fields = '__all__'
 
 
 class Recovery1Serializer(serializers.ModelSerializer):
     class Meta:
         model = Recovery1
-        fields = (
-            'pk',
-            'mean_hr', 'mean_rr', 'sdnn', 'rmssd', 'pnn50', 'pnn20', 'pnn10', 'pnn05',
-            'vlf', 'lf', 'hf', 'lf_hf_ratio',
-            'sd1', 'sd2', 'sd1_sd2_ratio'
-        )
+        fields = '__all__'
 
 
 class Stimulation2Serializer(serializers.ModelSerializer):
     class Meta:
         model = Stimulation2
-        fields = (
-            'pk',
-            'mean_hr', 'mean_rr', 'sdnn', 'rmssd', 'pnn50', 'pnn20', 'pnn10', 'pnn05',
-            'vlf', 'lf', 'hf', 'lf_hf_ratio',
-            'sd1', 'sd2', 'sd1_sd2_ratio'
-        )
+        fields = '__all__'
 
 
 class Recovery2Serializer(serializers.ModelSerializer):
     class Meta:
         model = Recovery2
-        fields = (
-            'pk',
-            'mean_hr', 'mean_rr', 'sdnn', 'rmssd', 'pnn50', 'pnn20', 'pnn10', 'pnn05',
-            'vlf', 'lf', 'hf', 'lf_hf_ratio',
-            'sd1', 'sd2', 'sd1_sd2_ratio'
-        )
+        fields = '__all__'
 
 
 class HRVSerializer(serializers.ModelSerializer):
