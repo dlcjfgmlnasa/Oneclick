@@ -13,27 +13,27 @@ class HRV(TimeStampedModel):
         db_column='HRV_RMSSD'
     )
     baseline = models.ForeignKey(
-        'ecg.Baseline',
+        'ecg.HRVBaseline',
         null=True, on_delete=models.CASCADE,
         related_name='hrv', db_column='HRV_BASELINE_ID'
     )
     stimulation1 = models.ForeignKey(
-        'ecg.Stimulation1',
+        'ecg.HRVStimulation1',
         null=True, on_delete=models.CASCADE,
         related_name='hrv', db_column='HRV_STIMULATION_1_ID'
     )
     recovery1 = models.ForeignKey(
-        'ecg.Recovery1',
+        'ecg.HRVRecovery1',
         null=True, on_delete=models.CASCADE,
         related_name='hrv', db_column='HRV_RECOVERY_1_ID'
     )
     stimulation2 = models.ForeignKey(
-        'ecg.Stimulation2',
+        'ecg.HRVStimulation2',
         null=True, on_delete=models.CASCADE,
         related_name='hrv', db_column='HRV_STIMULATION_2_ID'
     )
     recovery2 = models.ForeignKey(
-        'ecg.Recovery2',
+        'ecg.HRVRecovery2',
         null=True, on_delete=models.CASCADE,
         related_name='hrv', db_column='HRV_RECOVERY_2_ID'
     )
@@ -99,26 +99,26 @@ class HRVParameter(TimeStampedModel):
         abstract = True
 
 
-class Baseline(HRVParameter):
+class HRVBaseline(HRVParameter):
     class Meta:
         db_table = 'OC_HRV_BASELINE'
 
 
-class Stimulation1(HRVParameter):
+class HRVStimulation1(HRVParameter):
     class Meta:
         db_table = 'OC_HRV_STIMULATION_1'
 
 
-class Recovery1(HRVParameter):
+class HRVRecovery1(HRVParameter):
     class Meta:
         db_table = 'OC_HRV_RECOVERY_1'
 
 
-class Stimulation2(HRVParameter):
+class HRVStimulation2(HRVParameter):
     class Meta:
         db_table = 'OC_HRV_STIMULATION_2'
 
 
-class Recovery2(HRVParameter):
+class HRVRecovery2(HRVParameter):
     class Meta:
         db_table = 'OC_HRV_RECOVERY_2'

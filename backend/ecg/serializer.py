@@ -5,31 +5,31 @@ from rest_framework import serializers
 
 class BaseLineSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Baseline
+        model = HRVBaseline
         fields = '__all__'
 
 
 class Stimulation1Serializer(serializers.ModelSerializer):
     class Meta:
-        model = Stimulation1
+        model = HRVStimulation1
         fields = '__all__'
 
 
 class Recovery1Serializer(serializers.ModelSerializer):
     class Meta:
-        model = Recovery1
+        model = HRVRecovery1
         fields = '__all__'
 
 
 class Stimulation2Serializer(serializers.ModelSerializer):
     class Meta:
-        model = Stimulation2
+        model = HRVStimulation2
         fields = '__all__'
 
 
 class Recovery2Serializer(serializers.ModelSerializer):
     class Meta:
-        model = Recovery2
+        model = HRVRecovery2
         fields = '__all__'
 
 
