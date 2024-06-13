@@ -2,7 +2,6 @@
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from ecg.models import HRV, HRVBaseline, HRVStimulation1, HRVRecovery1, HRVStimulation2, HRVRecovery2
 from ecg.serializer import *
 
 
@@ -24,14 +23,6 @@ class HRVParameterView(APIView):
 
         serializer_cls = HRVSerializer(hrv)
         data = serializer_cls.data
-        print(data['nni'])
-        # data['nni'] = {
-        #     'data': {
-        #         'x': list(range(data['nni'])),
-        #         'y': data['nni']
-        #     },
-        # }
-        print(data)
         return Response(
             data,
             status=status.HTTP_200_OK

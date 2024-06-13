@@ -4,5 +4,7 @@ from . import views
 
 
 urlpatterns = [
-
+    path('analysis/<pk>/',
+         views.EEGParameterView.as_view(),
+         name='subject pk'),
 ]

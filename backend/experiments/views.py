@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+import base64
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -10,10 +11,8 @@ from .models import Experiments
 from ecg.models import *
 from eeg.models import *
 from django.db.models import Q
-from PIL import Image
-import base64
-import io
-from django.core.files.uploadedfile import InMemoryUploadedFile
+from uuid import uuid4
+from django.core.files.base import ContentFile
 
 
 class ExperimentsPagination(PageNumberPagination):
@@ -35,10 +34,7 @@ class ExperimentView(APIView):
 
     @staticmethod
     def base64_file(data, name=None):
-        from uuid import uuid4
-        from django.core.files.base import ContentFile
-        name = str(uuid4())
-        return ContentFile(base64.b64decode(data), name='{}'.format(name))
+        return ContentFile(base64.b64decode(data), name='{}.jpg'.format(str(uuid4())))
 
     def image_obj_save(self, obj, name, contents):
         eeg = obj.objects.create(
