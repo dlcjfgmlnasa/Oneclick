@@ -36,7 +36,7 @@ class ExperimentView(APIView):
     def base64_file(data, name=None):
         return ContentFile(base64.b64decode(data), name='{}.jpg'.format(str(uuid4())))
 
-    def image_obj_save(self, obj, name, contents):
+    def eeg_obj_save(self, obj, name, contents):
         eeg = obj.objects.create(
             topography_delta=self.base64_file(contents[name]['topography_delta']),
             topography_theta=self.base64_file(contents[name]['topography_theta']),
@@ -51,6 +51,26 @@ class ExperimentView(APIView):
         )
         return eeg
 
+    def ecg_obj_save(self, obj, name, contents):
+        ecg = obj.objects.create(
+            sdnn=contents[name]['sdnn'],
+            rmssd=contents[name]['rmssd'],
+            sdsd=contents[name]['sdsd'],
+            nn50=contents[name]['nn50'],
+            pnn50=contents[name]['pnn50'],
+            tri_index=contents[name]['tri_index'],
+            vlf_rel_power=contents[name]['vlf_rel_power'],
+            lf_rel_power=contents[name]['lf_rel_power'],
+            hf_rel_power=contents[name]['hf_rel_power'],
+            lh_ratio=contents[name]['lh_ratio'],
+            norm_lf=contents[name]['norm_lf'],
+            norm_hf=contents[name]['norm_hf'],
+            psd=contents[name]['psd'],
+            heart_rate=self.base64_file(contents[name]['heart_rate']),
+            comparison=self.base64_file(contents[name]['comparison']),
+        )
+        return ecg
+
     def post(self, request):
         data = request.data
 
@@ -58,21 +78,21 @@ class ExperimentView(APIView):
             hrv = HRV.objects.create(
                 nni=eval(data['hrv'])['nni'],
                 rmssd=eval(data['hrv'])['rmssd'],
-                baseline=HRVBaseline.objects.create(**eval(data['hrv'])['baseline']),
-                stimulation1=HRVStimulation1.objects.create(**eval(data['hrv'])['stimulation1']),
-                recovery1=HRVRecovery1.objects.create(**eval(data['hrv'])['recovery1']),
-                stimulation2=HRVStimulation2.objects.create(**eval(data['hrv'])['stimulation2']),
-                recovery2=HRVRecovery2.objects.create(**eval(data['hrv'])['recovery2'])
+                baseline=self.ecg_obj_save(HRVBaseline, 'baseline', eval(data['hrv'])),
+                stimulation1=self.ecg_obj_save(HRVStimulation1, 'stimulation1', eval(data['hrv'])),
+                recovery1=self.ecg_obj_save(HRVRecovery1, 'recovery1', eval(data['hrv'])),
+                stimulation2=self.ecg_obj_save(HRVStimulation2, 'stimulation2', eval(data['hrv'])),
+                recovery2=self.ecg_obj_save(HRVRecovery2, 'recovery2', eval(data['hrv'])),
             )
 
             eeg = EEG.objects.create(
                 psd=eval(data['eeg'])['psd'],
                 sleep_staging=eval(data['eeg'])['sleep_staging'],
-                baseline=self.image_obj_save(EEGBaseline, 'baseline', eval(data['eeg'])),
-                stimulation1=self.image_obj_save(EEGStimulation1, 'stimulation1', eval(data['eeg'])),
-                recovery1=self.image_obj_save(EEGRecovery1, 'recovery1', eval(data['eeg'])),
-                stimulation2=self.image_obj_save(EEGStimulation2, 'stimulation2', eval(data['eeg'])),
-                recovery2=self.image_obj_save(EEGRecovery2, 'recovery2', eval(data['eeg'])),
+                baseline=self.eeg_obj_save(EEGBaseline, 'baseline', eval(data['eeg'])),
+                stimulation1=self.eeg_obj_save(EEGStimulation1, 'stimulation1', eval(data['eeg'])),
+                recovery1=self.eeg_obj_save(EEGRecovery1, 'recovery1', eval(data['eeg'])),
+                stimulation2=self.eeg_obj_save(EEGStimulation2, 'stimulation2', eval(data['eeg'])),
+                recovery2=self.eeg_obj_save(EEGRecovery2, 'recovery2', eval(data['eeg'])),
             )
 
             age = self.get_value(data, 'age')

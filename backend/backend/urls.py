@@ -20,6 +20,7 @@ from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 from .views import MyTokenObtainPairView
 from django.conf.urls.static import static
 from django.conf import settings
+from . import views
 
 
 urlpatterns = [
@@ -32,4 +33,11 @@ urlpatterns = [
     path('api/v1/exp/', include('experiments.urls')),
     path('api/v1/ecg/', include('ecg.urls')),
     path('api/v1/eeg/', include('eeg.urls')),
+
+    # path('', views.AppView.as_view()),
+    # path('flutter.js', views.FlutterAppView.as_view()),
+    # path('manifest.json', views.ManiFestView.as_view()),
+    # path('flutter_service_worker.js', views.FlutterWorkerView.as_view()),
+    # path('main.dart.js', views.FlutterAppView.as_view()),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

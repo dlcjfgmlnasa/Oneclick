@@ -94,6 +94,18 @@ class HRVParameter(TimeStampedModel):
         null=True, blank=True,
         db_column='HRV_NORM_HF'
     )
+    psd = models.JSONField(
+        null=False,
+        db_column='HRV_PSD'
+    )
+    heart_rate = models.ImageField(
+        null=False, blank=False,
+        db_column='HRV_HEAD_RATE'
+    )
+    comparison = models.ImageField(
+        null=False, blank=False,
+        db_column='HRV_COMPARISON'
+    )
 
     class Meta:
         abstract = True
