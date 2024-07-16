@@ -37,6 +37,10 @@ class HRV(TimeStampedModel):
         null=True, on_delete=models.CASCADE,
         related_name='hrv', db_column='HRV_RECOVERY_2_ID'
     )
+    note = models.TextField(
+        null=True, blank=True,
+        db_column='HRV_NOTE'
+    )
 
     class Meta:
         db_table = 'OC_HRV'

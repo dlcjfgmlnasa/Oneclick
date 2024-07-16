@@ -53,3 +53,12 @@ class HRVSerializer(serializers.ModelSerializer):
             'stimulation2',
             'recovery2',
         )
+
+
+class HRVNoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HRV
+        fields = (
+            'pk',
+            'note'
+        )

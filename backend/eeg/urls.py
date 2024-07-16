@@ -7,4 +7,7 @@ urlpatterns = [
     path('analysis/<pk>/',
          views.EEGParameterView.as_view(),
          name='subject pk'),
+    path('analysis/<pk>/note/',
+         views.EEGNoteView.as_view(),
+         name='subject note pk'),
 ]

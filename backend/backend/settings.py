@@ -148,8 +148,8 @@ SIMPLE_JWT = {
 
 
 CORS_ORIGIN_WHITELIST = [
-    '127.0.0.1:8000',
-    '34.64.50.127:8000'
+    'http://127.0.0.1:8000',
+    'http://34.64.50.127:8000'
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -174,7 +174,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     # str(APPS_DIR.path('static')),
-    str(ROOT_DIR.path('backend', 'build')),
+    # str(ROOT_DIR.path('backend', 'build')),
 ]
 
 

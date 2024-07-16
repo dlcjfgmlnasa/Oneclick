@@ -12,6 +12,11 @@ class EEG(TimeStampedModel):
         null=False,
         db_column='EEG_SLEEP_STAGING'
     )
+    frontal_limbic = models.ForeignKey(
+        'eeg.EEGFrontalLimBic',
+        null=True, on_delete=models.CASCADE,
+        related_name='eeg', db_column='EEG_FRONTAL_LIMBIC_ID'
+    )
     baseline = models.ForeignKey(
         'eeg.EEGBaseline',
         null=True, on_delete=models.CASCADE,
@@ -37,9 +42,36 @@ class EEG(TimeStampedModel):
         null=True, on_delete=models.CASCADE,
         related_name='eeg', db_column='EEG_RECOVERY_2_ID'
     )
+    note = models.TextField(
+        null=True, blank=True,
+        db_column='EEG_NOTE'
+    )
 
     class Meta:
         db_table = 'OC_EEG'
+
+
+class EEGFrontalLimBic(TimeStampedModel):
+    delta = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_LIMBIC_DELTA'
+    )
+    theta = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_LIMBIC_THETA'
+    )
+    alpha = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_LIMBIC_ALPHA'
+    )
+    beta = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_LIMBIC_BETA'
+    )
+    gamma = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_LIMBIC_GAMMA'
+    )
 
 
 class EEGParameter(TimeStampedModel):

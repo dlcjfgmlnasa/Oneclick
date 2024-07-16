@@ -54,3 +54,11 @@ class EEGSerializer(serializers.ModelSerializer):
             'recovery2',
         )
 
+
+class EEGNoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EEG
+        fields = (
+            'pk',
+            'note'
+        )

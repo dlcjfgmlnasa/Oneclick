@@ -88,6 +88,13 @@ class ExperimentView(APIView):
             eeg = EEG.objects.create(
                 psd=eval(data['eeg'])['psd'],
                 sleep_staging=eval(data['eeg'])['sleep_staging'],
+                frontal_limbic=EEGFrontalLimBic.objects.create(
+                    delta=self.base64_file(eval(data['eeg'])['frontal_limbic']['delta']),
+                    theta=self.base64_file(eval(data['eeg'])['frontal_limbic']['theta']),
+                    alpha=self.base64_file(eval(data['eeg'])['frontal_limbic']['alpha']),
+                    beta=self.base64_file(eval(data['eeg'])['frontal_limbic']['beta']),
+                    gamma=self.base64_file(eval(data['eeg'])['frontal_limbic']['gamma'])
+                ),
                 baseline=self.eeg_obj_save(EEGBaseline, 'baseline', eval(data['eeg'])),
                 stimulation1=self.eeg_obj_save(EEGStimulation1, 'stimulation1', eval(data['eeg'])),
                 recovery1=self.eeg_obj_save(EEGRecovery1, 'recovery1', eval(data['eeg'])),
