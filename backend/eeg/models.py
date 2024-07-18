@@ -13,7 +13,7 @@ class EEG(TimeStampedModel):
         db_column='EEG_SLEEP_STAGING'
     )
     frontal_limbic = models.ForeignKey(
-        'eeg.EEGFrontalLimBic',
+        'eeg.EEGFrontalLimbic',
         null=True, on_delete=models.CASCADE,
         related_name='eeg', db_column='EEG_FRONTAL_LIMBIC_ID'
     )
@@ -51,7 +51,7 @@ class EEG(TimeStampedModel):
         db_table = 'OC_EEG'
 
 
-class EEGFrontalLimBic(TimeStampedModel):
+class EEGFrontalLimbic(TimeStampedModel):
     delta = models.ImageField(
         null=False, blank=False,
         db_column='EEG_FRONTAL_LIMBIC_DELTA'

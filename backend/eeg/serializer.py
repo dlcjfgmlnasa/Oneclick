@@ -3,6 +3,12 @@ from rest_framework import serializers
 from eeg.models import *
 
 
+class EEGFrontalLimbicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EEGFrontalLimbic
+        fields = '__all__'
+
+
 class EEGBaseLineSerializer(serializers.ModelSerializer):
     class Meta:
         model = EEGBaseline
@@ -36,6 +42,7 @@ class EEGRecovery2Serializer(serializers.ModelSerializer):
 class EEGSerializer(serializers.ModelSerializer):
     pk = serializers.IntegerField(read_only=True)
     baseline = EEGBaseLineSerializer(read_only=True)
+    frontal_limbic = EEGFrontalLimbicSerializer(read_only=True)
     stimulation1 = EEGStimulation1Serializer(read_only=True)
     recovery1 = EEGRecovery1Serializer(read_only=True)
     stimulation2 = EEGStimulation2Serializer(read_only=True)
@@ -47,6 +54,7 @@ class EEGSerializer(serializers.ModelSerializer):
             'pk',
             'psd',
             'sleep_staging',
+            'frontal_limbic',
             'baseline',
             'stimulation1',
             'recovery1',
