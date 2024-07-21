@@ -60,6 +60,7 @@ class EEGSerializer(serializers.ModelSerializer):
             'recovery1',
             'stimulation2',
             'recovery2',
+            'note',
         )
 
 
