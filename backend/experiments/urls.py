@@ -10,6 +10,11 @@ urlpatterns = [
         name='add experiments'
     ),
     path(
+        '<int:pk>/',
+        views.ExperimentDeleteView.as_view(),
+        name='delete experiments'
+    ),
+    path(
         'list/',
         views.ExperimentListView().as_view(),
         name='list experiments'

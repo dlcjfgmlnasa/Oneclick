@@ -88,7 +88,7 @@ class ExperimentView(APIView):
             eeg = EEG.objects.create(
                 psd=eval(data['eeg'])['psd'],
                 sleep_staging=eval(data['eeg'])['sleep_staging'],
-                frontal_limbic=EEGFrontalLimBic.objects.create(
+                frontal_limbic=EEGFrontalLimbic.objects.create(
                     delta=self.base64_file(eval(data['eeg'])['frontal_limbic']['delta']),
                     theta=self.base64_file(eval(data['eeg'])['frontal_limbic']['theta']),
                     alpha=self.base64_file(eval(data['eeg'])['frontal_limbic']['alpha']),
@@ -122,6 +122,20 @@ class ExperimentView(APIView):
                 {'result': 'Failed!! Contact Your Administrator!!'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+
+class ExperimentDeleteView(APIView):
+    def delete(self, request, pk):
+        try:
+            exp = Experiments.objects.get(pk=pk)
+        except Experiments.DoesNotExist:
+            return Response(
+                status=status.HTTP_404_NOT_FOUND
+            )
+        exp.delete()
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
 
 
 class ExperimentListView(ListAPIView):
