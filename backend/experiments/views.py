@@ -151,13 +151,23 @@ class ExperimentListView(ListAPIView):
         name = self.request.GET.get('name')
         sorting = self.request.GET.get('sorting')
 
-        query = name
-        if query:
+        # query = name
+        # if query:
+        #     query_object = Q()
+        #     if name:
+        #         query_object.add(Q(name=name), Q.OR)
+        #     queryset = queryset.filter(query_object)
+        #     queryset = queryset.order_by('-{}'.format('int_dt'))
+        if sorting:
             query_object = Q()
             if name:
                 query_object.add(Q(name=name), Q.OR)
-            queryset = queryset.filter(query_object)
-            queryset = queryset.order_by('-{}'.format('measurement_date'))
-        if sorting:
-            queryset = queryset.order_by('-{}'.format(sorting))
+                queryset = queryset.filter(query_object)
+                if sorting == 'name':
+                    queryset = queryset.order_by('-{}'.format('int_dt'))
+                else:
+                    queryset = queryset.order_by('-{}'.format(sorting))
+            else:
+                queryset = queryset.filter(query_object)
+                queryset = queryset.order_by('-{}'.format('int_dt'))
         return queryset
