@@ -158,5 +158,5 @@ class ExperimentListView(ListAPIView):
                 query_object.add(Q(name=name), Q.OR)
             queryset = queryset.filter(query_object)
         if sorting:
-            queryset = queryset.order_by('{}'.format(sorting))
+            queryset = queryset.order_by('-{}'.format(sorting))
         return queryset

@@ -42,5 +42,5 @@ class Experiments(TimeStampedModel):
 
     class Meta:
         db_table = 'OC_EXPERIMENTS'
-        ordering = ['-pk']
+        ordering = ['-measurement_date']
 
