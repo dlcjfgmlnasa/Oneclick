@@ -31,13 +31,21 @@ class Experiments(TimeStampedModel):
     )
     hrv = models.ForeignKey(
         'ecg.HRV',
+        related_name='experiments',
         null=True, on_delete=models.CASCADE,
         db_column='EXPERIMENT_HRV'
     )
     eeg = models.ForeignKey(
         'eeg.EEG',
+        related_name='experiments',
         null=True, on_delete=models.CASCADE,
         db_column='EXPERIMENT_EEG'
+    )
+    questionnaire = models.ForeignKey(
+        'survey.Questionnaire',
+        related_name='experiments',
+        null=True, on_delete=models.CASCADE,
+        db_comment='EXPERIMENT_SURVEY'
     )
 
     class Meta:

@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/v1/exp/', include('experiments.urls')),
     path('api/v1/ecg/', include('ecg.urls')),
     path('api/v1/eeg/', include('eeg.urls')),
+    path('api/v1/survey/', include('survey.urls'))
 
     # path('', views.AppView.as_view()),
     # path('flutter.js', views.FlutterAppView.as_view()),
