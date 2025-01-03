@@ -42,6 +42,27 @@ class EEG(TimeStampedModel):
         null=True, on_delete=models.CASCADE,
         related_name='eeg', db_column='EEG_RECOVERY_2_ID'
     )
+    diff1 = models.ForeignKey(
+        'eeg.EEGDiff1',
+        null=True, on_delete=models.CASCADE,
+        related_name='eeg', db_column='EEG_DIFF_1_ID'
+    )
+    diff2 = models.ForeignKey(
+        'eeg.EEGDiff2',
+        null=True, on_delete=models.CASCADE,
+        related_name='eeg', db_column='EEG_DIFF_2_ID'
+    )
+    diff3 = models.ForeignKey(
+        'eeg.EEGDiff3',
+        null=True, on_delete=models.CASCADE,
+        related_name='eeg', db_column='EEG_DIFF_3_ID'
+    )
+    diff4 = models.ForeignKey(
+        'eeg.EEGDiff4',
+        null=True, on_delete=models.CASCADE,
+        related_name='eeg', db_column='EEG_DIFF_4_ID'
+    )
+
     note = models.TextField(
         null=True, blank=True,
         db_column='EEG_NOTE'
@@ -144,3 +165,23 @@ class EEGStimulation2(EEGParameter):
 class EEGRecovery2(EEGParameter):
     class Meta:
         db_table = 'OC_EEG_RECOVERY_2'
+
+
+class EEGDiff1(EEGParameter):
+    class Meta:
+        db_table = 'OC_EEG_DIFF_1'
+
+
+class EEGDiff2(EEGParameter):
+    class Meta:
+        db_table = 'OC_EEG_DIFF_2'
+
+
+class EEGDiff3(EEGParameter):
+    class Meta:
+        db_table = 'OC_EEG_DIFF_3'
+
+
+class EEGDiff4(EEGParameter):
+    class Meta:
+        db_table = 'OC_EEG_DIFF_4'
