@@ -39,6 +39,30 @@ class EEGRecovery2Serializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class EEGDiff1Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = EEGDiff1
+        fields = '__all__'
+
+
+class EEGDiff2Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = EEGDiff2
+        fields = '__all__'
+
+
+class EEGDiff3Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = EEGDiff3
+        fields = '__all__'
+
+
+class EEGDiff4Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = EEGDiff4
+        fields = '__all__'
+
+
 class EEGSerializer(serializers.ModelSerializer):
     pk = serializers.IntegerField(read_only=True)
     baseline = EEGBaseLineSerializer(read_only=True)
@@ -47,6 +71,10 @@ class EEGSerializer(serializers.ModelSerializer):
     recovery1 = EEGRecovery1Serializer(read_only=True)
     stimulation2 = EEGStimulation2Serializer(read_only=True)
     recovery2 = EEGRecovery2Serializer(read_only=True)
+    diff1 = EEGDiff1Serializer(read_only=True)
+    diff2 = EEGDiff2Serializer(read_only=True)
+    diff3 = EEGDiff3Serializer(read_only=True)
+    diff4 = EEGDiff4Serializer(read_only=True)
 
     class Meta:
         model = EEG
@@ -60,6 +88,10 @@ class EEGSerializer(serializers.ModelSerializer):
             'recovery1',
             'stimulation2',
             'recovery2',
+            'diff1',
+            'diff2',
+            'diff3',
+            'diff4',
             'note',
         )
 
