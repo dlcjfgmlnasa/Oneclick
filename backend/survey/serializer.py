@@ -7,6 +7,7 @@ class QuestionnaireSerializer(serializers.ModelSerializer):
     class Meta:
         model = Questionnaire
         fields = (
+            'pk',
             'irls',
             'psql',
             'isi',

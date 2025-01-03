@@ -19,7 +19,7 @@ class QuestionnaireView(APIView):
         serializer_cls = QuestionnaireSerializer(data=requests.data)
         if serializer_cls.is_valid():
             serializer_cls.save()
-            questionnaire = Questionnaire.objects.get(pk=serializer_cls.data['id'])
+            questionnaire = Questionnaire.objects.get(pk=serializer_cls.data['pk'])
             model.questionnaire = questionnaire
             model.save()
 
