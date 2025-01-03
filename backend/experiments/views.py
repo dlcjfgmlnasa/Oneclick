@@ -100,6 +100,10 @@ class ExperimentView(APIView):
                 recovery1=self.eeg_obj_save(EEGRecovery1, 'recovery1', eval(data['eeg'])),
                 stimulation2=self.eeg_obj_save(EEGStimulation2, 'stimulation2', eval(data['eeg'])),
                 recovery2=self.eeg_obj_save(EEGRecovery2, 'recovery2', eval(data['eeg'])),
+                diff1=self.eeg_obj_save(EEGDiff1, 'diff1', eval(data['eeg'])),
+                diff2=self.eeg_obj_save(EEGDiff2, 'diff2', eval(data['eeg'])),
+                diff3=self.eeg_obj_save(EEGDiff3, 'diff3', eval(data['eeg'])),
+                diff4=self.eeg_obj_save(EEGDiff4, 'diff4', eval(data['eeg'])),
             )
 
             age = self.get_value(data, 'age')
@@ -164,3 +168,4 @@ class ExperimentListView(ListAPIView):
         else:
             queryset = queryset.order_by('-{}'.format('pk'))
         return queryset
+
