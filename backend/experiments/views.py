@@ -155,7 +155,6 @@ class ExperimentListView(ListAPIView):
         query_object = Q()
         if name:
             query_object.add(Q(name=name), Q.OR)
-
         queryset = queryset.filter(query_object)
         if sorting:
             if descending == 'True':
