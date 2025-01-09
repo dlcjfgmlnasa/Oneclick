@@ -47,7 +47,12 @@ class ExperimentView(APIView):
             connectivity_theta=self.base64_file(contents[name]['connectivity_theta']),
             connectivity_alpha=self.base64_file(contents[name]['connectivity_alpha']),
             connectivity_beta=self.base64_file(contents[name]['connectivity_beta']),
-            connectivity_gamma=self.base64_file(contents[name]['connectivity_gamma'])
+            connectivity_gamma=self.base64_file(contents[name]['connectivity_gamma']),
+            connectivity2_delta=self.base64_file(contents[name]['connectivity2_delta']),
+            connectivity2_theta=self.base64_file(contents[name]['connectivity2_theta']),
+            connectivity2_alpha=self.base64_file(contents[name]['connectivity2_alpha']),
+            connectivity2_beta=self.base64_file(contents[name]['connectivity2_beta']),
+            connectivity2_gamma=self.base64_file(contents[name]['connectivity2_gamma'])
         )
         return eeg
 
