@@ -119,23 +119,44 @@ class EEGParameter(TimeStampedModel):
 
     connectivity_delta = models.ImageField(
         null=False, blank=False,
-        db_column='EEG_CONNECTIVITY_DELTA'
+        db_column='EEG_CONNECTIVITY_DELTA_COH'
     )
     connectivity_theta = models.ImageField(
         null=False, blank=False,
-        db_column='EEG_CONNECTIVITY_THETA'
+        db_column='EEG_CONNECTIVITY_THETA_COH'
     )
     connectivity_alpha = models.ImageField(
         null=False, blank=False,
-        db_column='EEG_CONNECTIVITY_ALPHA'
+        db_column='EEG_CONNECTIVITY_ALPHA_COH'
     )
     connectivity_beta = models.ImageField(
         null=False, blank=False,
-        db_column='EEG_CONNECTIVITY_BETA'
+        db_column='EEG_CONNECTIVITY_BETA_COH'
     )
     connectivity_gamma = models.ImageField(
         null=False, blank=False,
-        db_column='EEG_CONNECTIVITY_GAMMA'
+        db_column='EEG_CONNECTIVITY_GAMMA_COH'
+    )
+
+    connectivity2_delta = models.ImageField(
+        null=True, blank=True,
+        db_column='EEG_CONNECTIVITY_DELTA_PLV'
+    )
+    connectivity2_theta = models.ImageField(
+        null=True, blank=True,
+        db_column='EEG_CONNECTIVITY_THETA_PLV'
+    )
+    connectivity2_alpha = models.ImageField(
+        null=True, blank=True,
+        db_column='EEG_CONNECTIVITY_ALPHA_PLV'
+    )
+    connectivity2_beta = models.ImageField(
+        null=True, blank=True,
+        db_column='EEG_CONNECTIVITY_BETA_PLV'
+    )
+    connectivity2_gamma = models.ImageField(
+        null=True, blank=True,
+        db_column='EEG_CONNECTIVITY_GAMMA_PLV'
     )
 
     class Meta:
