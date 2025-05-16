@@ -36,14 +36,12 @@ class QuestionnaireView(APIView):
 class QuestionnaireListView(APIView):
     def get(self, requests):
         name = self.request.GET.get('name')
-        age = self.request.GET.get('age')
         birth = self.request.GET.get('birth')
         sex = self.request.GET.get('sex')
 
         try:
             exp = Experiments.objects.filter(
                 name=name,
-                age=age,
                 birth=birth,
                 sex=sex
             ).order_by('-measurement_date')
