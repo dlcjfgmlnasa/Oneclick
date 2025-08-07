@@ -158,6 +158,10 @@ class EEGParameter(TimeStampedModel):
         null=True, blank=True,
         db_column='EEG_CONNECTIVITY_GAMMA_PLV'
     )
+    faa = models.ImageField(
+        null=True, blank=True,
+        db_column='EEG_FRONTAL_ALPHA_ASYMMETRY'
+    )
 
     class Meta:
         abstract = True
