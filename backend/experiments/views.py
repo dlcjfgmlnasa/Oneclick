@@ -157,20 +157,21 @@ class ExperimentListView(ListAPIView):
         return queryset
 
     def filter_queryset(self, queryset):
-        name = self.request.GET.get('name')
+        name = self.request.GET.get('name', '')
         sorting = self.request.GET.get('sorting')
         descending = self.request.GET.get('descending')
 
-        query_object = Q()
         if name:
-            query_object.add(Q(name=name), Q.OR)
-        queryset = queryset.filter(query_object)
+            terms = [t for t in name.strip().split() if t]
+            for term in terms:
+                queryset = queryset.filter(name__icontains=term)
+
         if sorting:
             if descending == 'True':
-                queryset = queryset.order_by('{}'.format(sorting))
+                queryset = queryset.order_by(f'-{sorting}')
             else:
-                queryset = queryset.order_by('-{}'.format(sorting))
+                queryset = queryset.order_by(f'{sorting}')
         else:
-            queryset = queryset.order_by('-{}'.format('pk'))
-        return queryset
+            queryset = queryset.order_by('-pk')
 
+        return queryset
