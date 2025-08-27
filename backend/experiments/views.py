@@ -109,6 +109,13 @@ class ExperimentView(APIView):
                 diff2=self.eeg_obj_save(EEGDiff2, 'diff2', eval(data['eeg'])),
                 diff3=self.eeg_obj_save(EEGDiff3, 'diff3', eval(data['eeg'])),
                 diff4=self.eeg_obj_save(EEGDiff4, 'diff4', eval(data['eeg'])),
+                faa=EEGFAA.objects.create(
+                    delta=self.base64_file(eval(data['eeg'])['faa']['delta']),
+                    theta=self.base64_file(eval(data['eeg'])['faa']['theta']),
+                    alpha=self.base64_file(eval(data['eeg'])['faa']['alpha']),
+                    beta=self.base64_file(eval(data['eeg'])['faa']['beta']),
+                    gamma=self.base64_file(eval(data['eeg'])['faa']['gamma'])
+                ),
             )
 
             age = self.get_value(data, 'age')
@@ -157,20 +164,21 @@ class ExperimentListView(ListAPIView):
         return queryset
 
     def filter_queryset(self, queryset):
-        name = self.request.GET.get('name')
+        name = self.request.GET.get('name', '')
         sorting = self.request.GET.get('sorting')
         descending = self.request.GET.get('descending')
 
-        query_object = Q()
         if name:
-            query_object.add(Q(name=name), Q.OR)
-        queryset = queryset.filter(query_object)
+            terms = [t for t in name.strip().split() if t]
+            for term in terms:
+                queryset = queryset.filter(name__icontains=term)
+
         if sorting:
             if descending == 'True':
-                queryset = queryset.order_by('{}'.format(sorting))
+                queryset = queryset.order_by(f'-{sorting}')
             else:
-                queryset = queryset.order_by('-{}'.format(sorting))
+                queryset = queryset.order_by(f'{sorting}')
         else:
-            queryset = queryset.order_by('-{}'.format('pk'))
-        return queryset
+            queryset = queryset.order_by('-pk')
 
+        return queryset
