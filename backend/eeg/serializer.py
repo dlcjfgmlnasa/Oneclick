@@ -8,7 +8,6 @@ class EEGFrontalLimbicSerializer(serializers.ModelSerializer):
         model = EEGFrontalLimbic
         fields = '__all__'
 
-
 class EEGBaseLineSerializer(serializers.ModelSerializer):
     class Meta:
         model = EEGBaseline
@@ -62,6 +61,10 @@ class EEGDiff4Serializer(serializers.ModelSerializer):
         model = EEGDiff4
         fields = '__all__'
 
+class EEGFaaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EEGFAA
+        fields = '__all__'
 
 class EEGSerializer(serializers.ModelSerializer):
     pk = serializers.IntegerField(read_only=True)
@@ -75,6 +78,7 @@ class EEGSerializer(serializers.ModelSerializer):
     diff2 = EEGDiff2Serializer(read_only=True)
     diff3 = EEGDiff3Serializer(read_only=True)
     diff4 = EEGDiff4Serializer(read_only=True)
+    faa = EEGFaaSerializer(read_only=True)
 
     class Meta:
         model = EEG
@@ -92,6 +96,7 @@ class EEGSerializer(serializers.ModelSerializer):
             'diff2',
             'diff3',
             'diff4',
+            'faa',
             'note',
         )
 

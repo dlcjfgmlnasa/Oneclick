@@ -62,6 +62,12 @@ class EEG(TimeStampedModel):
         null=True, on_delete=models.CASCADE,
         related_name='eeg', db_column='EEG_DIFF_4_ID'
     )
+    faa = models.ForeignKey(
+        'eeg.EEGFAA',
+        null=True, on_delete=models.CASCADE,
+        related_name='eeg', db_column='EEG_FAA_ID'
+    )
+    
 
     note = models.TextField(
         null=True, blank=True,
@@ -93,6 +99,31 @@ class EEGFrontalLimbic(TimeStampedModel):
         null=False, blank=False,
         db_column='EEG_FRONTAL_LIMBIC_GAMMA'
     )
+
+class EEGFAA(TimeStampedModel):
+    delta = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_ASYMMETRY_DELTA'
+    )
+    theta = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_ASYMMETRY_THETA'
+    )
+    alpha = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_ASYMMETRY_ALPHA'
+    )
+    beta = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_ASYMMETRY_BETA'
+    )
+    gamma = models.ImageField(
+        null=False, blank=False,
+        db_column='EEG_FRONTAL_ASYMMETRY_GAMMA'
+    )
+
+    class Meta:
+        db_table = 'OC_EEG_FAA'
 
 
 class EEGParameter(TimeStampedModel):

@@ -109,6 +109,13 @@ class ExperimentView(APIView):
                 diff2=self.eeg_obj_save(EEGDiff2, 'diff2', eval(data['eeg'])),
                 diff3=self.eeg_obj_save(EEGDiff3, 'diff3', eval(data['eeg'])),
                 diff4=self.eeg_obj_save(EEGDiff4, 'diff4', eval(data['eeg'])),
+                faa=EEGFAA.objects.create(
+                    delta=self.base64_file(eval(data['eeg'])['faa']['delta']),
+                    theta=self.base64_file(eval(data['eeg'])['faa']['theta']),
+                    alpha=self.base64_file(eval(data['eeg'])['faa']['alpha']),
+                    beta=self.base64_file(eval(data['eeg'])['faa']['beta']),
+                    gamma=self.base64_file(eval(data['eeg'])['faa']['gamma'])
+                ),
             )
 
             age = self.get_value(data, 'age')
