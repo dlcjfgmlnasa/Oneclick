@@ -47,6 +47,12 @@ class Experiments(TimeStampedModel):
         null=True, on_delete=models.CASCADE,
         db_comment='EXPERIMENT_SURVEY'
     )
+    report = models.ForeignKey(
+        'report.Report',
+        related_name='experiments',
+        null=True, on_delete=models.CASCADE,
+        db_comment='EXPERIMENT_REPORT'
+    )
 
     class Meta:
         db_table = 'OC_EXPERIMENTS'

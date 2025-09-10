@@ -53,7 +53,8 @@ LOCAL_APPS = [
     'experiments',
     'ecg',
     'eeg',
-    'survey'
+    'survey',
+    'report',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

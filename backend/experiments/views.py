@@ -10,6 +10,7 @@ from .serializer import ExperimentsViewSerializer
 from .models import Experiments
 from ecg.models import *
 from eeg.models import *
+from report.models import *
 from django.db.models import Q
 from uuid import uuid4
 from django.core.files.base import ContentFile
@@ -118,6 +119,28 @@ class ExperimentView(APIView):
                 ),
             )
 
+            report = Report.objects.create(
+                tib = eval(data['report'])['tib'],
+                twt = eval(data['report'])['twt'],
+                tst = eval(data['report'])['tst'],
+                waso = eval(data['report'])['waso'],
+                sleep_latency = eval(data['report'])['sleep_latency'],
+                rem_latency = eval(data['report'])['rem_latency'],
+                sleep_eff = eval(data['report'])['sleep_eff'],
+
+                sleep_n1_tst = eval(data['report'])['sleep_n1_tst'],
+                sleep_n2_tst = eval(data['report'])['sleep_n2_tst'],
+                sleep_n3_tst = eval(data['report'])['sleep_n3_tst'],
+                sleep_nrem_tst = eval(data['report'])['sleep_nrem_tst'],
+                sleep_rem_tst = eval(data['report'])['sleep_rem_tst'],
+
+                sleep_n1_min = eval(data['report'])['sleep_n1_min'],
+                sleep_n2_min = eval(data['report'])['sleep_n2_min'],
+                sleep_n3_min = eval(data['report'])['sleep_n3_min'],
+                sleep_nrem_min = eval(data['report'])['sleep_nrem_min'],
+                sleep_rem_min = eval(data['report'])['sleep_rem_min'],
+            )
+
             age = self.get_value(data, 'age')
             birth = self.get_value(data, 'birth')
             sex = self.get_value(data, 'sex')
@@ -126,7 +149,8 @@ class ExperimentView(APIView):
             exp = Experiments(name=data['name'], age=age, birth=birth, sex=sex,
                               measurement_date=measurement_date,
                               hrv=hrv,
-                              eeg=eeg)
+                              eeg=eeg,
+                              report=report)
             exp.save()
             return Response(
                 {'result': 'Success!!'},
