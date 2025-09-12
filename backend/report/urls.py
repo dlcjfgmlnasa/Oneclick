@@ -4,5 +4,9 @@ from . import views
 
 
 urlpatterns = [
-    #It won't be neccessary now
+    path(
+        '<pk>/',
+        views.SleepReportListView.as_view(),
+        name='list sleepreport'
+    ),
 ]

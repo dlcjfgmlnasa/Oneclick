@@ -79,67 +79,73 @@ class ExperimentView(APIView):
 
     def post(self, request):
         data = request.data
+        hrv = None
+        eeg = None
+        report = None
 
         try:
-            hrv = HRV.objects.create(
-                nni=eval(data['hrv'])['nni'],
-                rmssd=eval(data['hrv'])['rmssd'],
-                baseline=self.ecg_obj_save(HRVBaseline, 'baseline', eval(data['hrv'])),
-                stimulation1=self.ecg_obj_save(HRVStimulation1, 'stimulation1', eval(data['hrv'])),
-                recovery1=self.ecg_obj_save(HRVRecovery1, 'recovery1', eval(data['hrv'])),
-                stimulation2=self.ecg_obj_save(HRVStimulation2, 'stimulation2', eval(data['hrv'])),
-                recovery2=self.ecg_obj_save(HRVRecovery2, 'recovery2', eval(data['hrv'])),
-            )
+            if 'hrv' in data and data['hrv']:
+                hrv = HRV.objects.create(
+                    nni=eval(data['hrv'])['nni'],
+                    rmssd=eval(data['hrv'])['rmssd'],
+                    baseline=self.ecg_obj_save(HRVBaseline, 'baseline', eval(data['hrv'])),
+                    stimulation1=self.ecg_obj_save(HRVStimulation1, 'stimulation1', eval(data['hrv'])),
+                    recovery1=self.ecg_obj_save(HRVRecovery1, 'recovery1', eval(data['hrv'])),
+                    stimulation2=self.ecg_obj_save(HRVStimulation2, 'stimulation2', eval(data['hrv'])),
+                    recovery2=self.ecg_obj_save(HRVRecovery2, 'recovery2', eval(data['hrv'])),
+                )
 
-            eeg = EEG.objects.create(
-                psd=eval(data['eeg'])['psd'],
-                sleep_staging=eval(data['eeg'])['sleep_staging'],
-                frontal_limbic=EEGFrontalLimbic.objects.create(
-                    delta=self.base64_file(eval(data['eeg'])['frontal_limbic']['delta']),
-                    theta=self.base64_file(eval(data['eeg'])['frontal_limbic']['theta']),
-                    alpha=self.base64_file(eval(data['eeg'])['frontal_limbic']['alpha']),
-                    beta=self.base64_file(eval(data['eeg'])['frontal_limbic']['beta']),
-                    gamma=self.base64_file(eval(data['eeg'])['frontal_limbic']['gamma'])
-                ),
-                baseline=self.eeg_obj_save(EEGBaseline, 'baseline', eval(data['eeg'])),
-                stimulation1=self.eeg_obj_save(EEGStimulation1, 'stimulation1', eval(data['eeg'])),
-                recovery1=self.eeg_obj_save(EEGRecovery1, 'recovery1', eval(data['eeg'])),
-                stimulation2=self.eeg_obj_save(EEGStimulation2, 'stimulation2', eval(data['eeg'])),
-                recovery2=self.eeg_obj_save(EEGRecovery2, 'recovery2', eval(data['eeg'])),
-                diff1=self.eeg_obj_save(EEGDiff1, 'diff1', eval(data['eeg'])),
-                diff2=self.eeg_obj_save(EEGDiff2, 'diff2', eval(data['eeg'])),
-                diff3=self.eeg_obj_save(EEGDiff3, 'diff3', eval(data['eeg'])),
-                diff4=self.eeg_obj_save(EEGDiff4, 'diff4', eval(data['eeg'])),
-                faa=EEGFAA.objects.create(
-                    delta=self.base64_file(eval(data['eeg'])['faa']['delta']),
-                    theta=self.base64_file(eval(data['eeg'])['faa']['theta']),
-                    alpha=self.base64_file(eval(data['eeg'])['faa']['alpha']),
-                    beta=self.base64_file(eval(data['eeg'])['faa']['beta']),
-                    gamma=self.base64_file(eval(data['eeg'])['faa']['gamma'])
-                ),
-            )
+            if 'eeg' in data and data['eeg']:
+                eeg = EEG.objects.create(
+                    psd=eval(data['eeg'])['psd'],
+                    sleep_staging=eval(data['eeg'])['sleep_staging'],
+                    frontal_limbic=EEGFrontalLimbic.objects.create(
+                        delta=self.base64_file(eval(data['eeg'])['frontal_limbic']['delta']),
+                        theta=self.base64_file(eval(data['eeg'])['frontal_limbic']['theta']),
+                        alpha=self.base64_file(eval(data['eeg'])['frontal_limbic']['alpha']),
+                        beta=self.base64_file(eval(data['eeg'])['frontal_limbic']['beta']),
+                        gamma=self.base64_file(eval(data['eeg'])['frontal_limbic']['gamma'])
+                    ),
+                    baseline=self.eeg_obj_save(EEGBaseline, 'baseline', eval(data['eeg'])),
+                    stimulation1=self.eeg_obj_save(EEGStimulation1, 'stimulation1', eval(data['eeg'])),
+                    recovery1=self.eeg_obj_save(EEGRecovery1, 'recovery1', eval(data['eeg'])),
+                    stimulation2=self.eeg_obj_save(EEGStimulation2, 'stimulation2', eval(data['eeg'])),
+                    recovery2=self.eeg_obj_save(EEGRecovery2, 'recovery2', eval(data['eeg'])),
+                    diff1=self.eeg_obj_save(EEGDiff1, 'diff1', eval(data['eeg'])),
+                    diff2=self.eeg_obj_save(EEGDiff2, 'diff2', eval(data['eeg'])),
+                    diff3=self.eeg_obj_save(EEGDiff3, 'diff3', eval(data['eeg'])),
+                    diff4=self.eeg_obj_save(EEGDiff4, 'diff4', eval(data['eeg'])),
+                    faa=EEGFAA.objects.create(
+                        delta=self.base64_file(eval(data['eeg'])['faa']['delta']),
+                        theta=self.base64_file(eval(data['eeg'])['faa']['theta']),
+                        alpha=self.base64_file(eval(data['eeg'])['faa']['alpha']),
+                        beta=self.base64_file(eval(data['eeg'])['faa']['beta']),
+                        gamma=self.base64_file(eval(data['eeg'])['faa']['gamma'])
+                    ),
+                )
 
-            report = Report.objects.create(
-                tib = eval(data['report'])['tib'],
-                twt = eval(data['report'])['twt'],
-                tst = eval(data['report'])['tst'],
-                waso = eval(data['report'])['waso'],
-                sleep_latency = eval(data['report'])['sleep_latency'],
-                rem_latency = eval(data['report'])['rem_latency'],
-                sleep_eff = eval(data['report'])['sleep_eff'],
+            if 'report' in data and data['report']:
+                report = Report.objects.create(
+                    tib = eval(data['report'])['tib'],
+                    twt = eval(data['report'])['twt'],
+                    tst = eval(data['report'])['tst'],
+                    waso = eval(data['report'])['waso'],
+                    sleep_latency = eval(data['report'])['sleep_latency'],
+                    rem_latency = eval(data['report'])['rem_latency'],
+                    sleep_eff = eval(data['report'])['sleep_eff'],
 
-                sleep_n1_tst = eval(data['report'])['sleep_n1_tst'],
-                sleep_n2_tst = eval(data['report'])['sleep_n2_tst'],
-                sleep_n3_tst = eval(data['report'])['sleep_n3_tst'],
-                sleep_nrem_tst = eval(data['report'])['sleep_nrem_tst'],
-                sleep_rem_tst = eval(data['report'])['sleep_rem_tst'],
+                    sleep_n1_tst = eval(data['report'])['sleep_n1_tst'],
+                    sleep_n2_tst = eval(data['report'])['sleep_n2_tst'],
+                    sleep_n3_tst = eval(data['report'])['sleep_n3_tst'],
+                    sleep_nrem_tst = eval(data['report'])['sleep_nrem_tst'],
+                    sleep_rem_tst = eval(data['report'])['sleep_rem_tst'],
 
-                sleep_n1_min = eval(data['report'])['sleep_n1_min'],
-                sleep_n2_min = eval(data['report'])['sleep_n2_min'],
-                sleep_n3_min = eval(data['report'])['sleep_n3_min'],
-                sleep_nrem_min = eval(data['report'])['sleep_nrem_min'],
-                sleep_rem_min = eval(data['report'])['sleep_rem_min'],
-            )
+                    sleep_n1_min = eval(data['report'])['sleep_n1_min'],
+                    sleep_n2_min = eval(data['report'])['sleep_n2_min'],
+                    sleep_n3_min = eval(data['report'])['sleep_n3_min'],
+                    sleep_nrem_min = eval(data['report'])['sleep_nrem_min'],
+                    sleep_rem_min = eval(data['report'])['sleep_rem_min'],
+                )
 
             age = self.get_value(data, 'age')
             birth = self.get_value(data, 'birth')
