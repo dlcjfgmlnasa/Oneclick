@@ -84,7 +84,7 @@ class ExperimentView(APIView):
         report = None
 
         try:
-            if data.get('hrv') and len(data.get('hrv')) > 10:
+            if str(data['hrv']).strip() != '""':
                 hrv = HRV.objects.create(
                     nni=eval(data['hrv'])['nni'],
                     rmssd=eval(data['hrv'])['rmssd'],
@@ -95,7 +95,7 @@ class ExperimentView(APIView):
                     recovery2=self.ecg_obj_save(HRVRecovery2, 'recovery2', eval(data['hrv'])),
                 )
 
-            if data.get('eeg'):
+            if str(data['eeg']).strip() != '""':
                 eeg = EEG.objects.create(
                     psd=eval(data['eeg'])['psd'],
                     sleep_staging=eval(data['eeg'])['sleep_staging'],
@@ -124,7 +124,7 @@ class ExperimentView(APIView):
                     ),
                 )
 
-            if data.get('report'):
+            if str(data['report']).strip() != '""':
                 report = Report.objects.create(
                     tib = eval(data['report'])['tib'],
                     twt = eval(data['report'])['twt'],
